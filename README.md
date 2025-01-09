@@ -16,7 +16,7 @@ This project is a console-based implementation of the popular Tic Tac Toe game. 
 ## Features
 - Two-player mode
 - Simple and intuitive user interface
-- Basic AI for single-player mode (optional)
+- Basic AI for single-player mode
 
 ## Installation
 To compile and run this project, you need a C++ compiler installed on your system.
