@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <windows.h>
+#include <vector>
 
 using namespace std;
 
@@ -29,33 +31,49 @@ bool checkWin(vector<char>& board, char symbol){
     return 0;
 }
 
+void aiMove(vector<char>& board, char symbol){
+    int move;
+    do{
+        move = rand() % 9;
+    } while (board[move] != ' ');
+    board[move] = symbol;
+}
+
 int main(){
 
     vector<char> board(9, ' ');
-    
     char symbol = 'X';
     int row, column;
+    int gameMode;
 
     cout << "Welcome to Tic Tac Toe!!!" << endl;
+    cout << "Select Game Mode: \n1. Player vs Player \n2. Player vs AI" << endl;
+    cin >> gameMode;
 
     for(int turn = 0; turn < 9; turn++){
         
         showBoard(board);
 
-        while(true){
-            
-            cout << "Player " << symbol  << ", enter a row (1-3) and a column (1-3)" << endl;
-            cin >> row >> column;
+        if(gameMode == 2 && symbol == 'O'){
+            cout << "AI is making a move..." << endl;
+            Sleep(2000);
+            aiMove(board, symbol);
+        } else {
+            while(true){
+                
+                cout << "Player " << symbol  << ", enter a row (1-3) and a column (1-3)" << endl;
+                cin >> row >> column;
 
-            row--; column--;
+                row--; column--;
 
-            if(board[row * 3 + column] != ' ' || row < 0 || row > 2 || column < 0 || column > 2)
-                cout << "Invalid move. Try again!" << endl; 
-            else
-                break;
+                if(board[row * 3 + column] != ' ' || row < 0 || row > 2 || column < 0 || column > 2)
+                    cout << "Invalid move. Try again!" << endl; 
+                else
+                    break;
+            }
+
+            board[row * 3 + column] = symbol;
         }
-
-        board[row * 3 + column] = symbol;
         
         if(checkWin(board, symbol)){
             showBoard(board);
